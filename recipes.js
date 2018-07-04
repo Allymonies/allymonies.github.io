@@ -1779,6 +1779,7 @@ var recipes = {
     }
 };
 var tiers = {};
+var machines = {};
 //Functions
 function getRecipe(item, machine=false) {
 	if (machine && recipes.hasOwnProperty(machine)) {
@@ -1815,11 +1816,13 @@ function addMachine(machine) {
 }
 
 function indexRecipes() {
-	tiers = {}
+	machines = {};
+	tiers = {};
 	for (var machine in recipes) {
 		if (recipes.hasOwnProperty(machine))  {
 			for (var item in recipes[machine]) {
 				if (recipes[machine].hasOwnProperty(item) && !tiers.hasOwnProperty(item)) {
+					machines[item] = machine;
 					if (Array.isArray(recipes[machine][item]["ingredients"][0])) {
 						var ingredients = recipes[machine][item]["ingredients"][0];
 					} else {
