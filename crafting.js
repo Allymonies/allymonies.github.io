@@ -27,7 +27,7 @@ function showRecipe(item) {
 			}
 		}
 	}
-	for (var i = 0; i < highestLevel; i++) {
+	for (var i = 0; i < highestLevel+1; i++) {
 		recipeHtml += "<li><h4>Level " + i.toString() + " Cost</h4><ul>";
 		var itemKeys = Object.keys(cost[i]);
 		itemKeys.sort();
