@@ -1883,7 +1883,7 @@ function calculateCost(item, costs={}, level=0) {
 				}
 			}
 			if (!costs.hasOwnProperty(indexes[item])) {
-				costs[indexes[item]];
+				costs[indexes[item]] = {};
 			}
 			if (!costs[indexes[item]].hasOwnProperty(item)) {
 				costs[indexes[item]][item] = 1;
