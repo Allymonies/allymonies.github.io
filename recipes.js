@@ -1869,6 +1869,7 @@ function indexItem(item, recursion=0) {
 					}
 				}
 			}
+			machines[item] = machine;
 			tiers[item] = highestIndex + 1;
 			return highestIndex + 1;
 		}
