@@ -14,6 +14,10 @@ $(document).ready(function() {
 	$("#recipe_picker").html(optionsHtml);
 	$(".js-example-basic-single").select2();
 	showRecipe("accurate_autobow");
+	$("#recipe_picker").on("change", function() {
+		console.log("Doing showRecipe on " + this.value);
+		showRecipe(this.value);
+	});
 });
 
 function showRecipe(item) {
@@ -43,8 +47,3 @@ function showRecipe(item) {
 	recipeHtml += "</ul>";
 	$("#recipe").html(recipeHtml);
 }
-
-$("#recipe_picker").on("change", function() {
-	console.log("Doing showRecipe on " + this.value);
-	showRecipe(this.value);
-});
