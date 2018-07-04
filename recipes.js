@@ -1778,7 +1778,7 @@ var recipes = {
         }
     }
 };
-var indexes = {};
+var tiers = {};
 //Functions
 function getRecipe(item, machine=false) {
 	if (machine && recipes.hasOwnProperty(machine)) {
@@ -1815,11 +1815,11 @@ function addMachine(machine) {
 }
 
 function indexRecipes() {
-	indexes = {}
+	tiers = {}
 	for (var machine in recipes) {
 		if (recipes.hasOwnProperty(machine))  {
 			for (var item in recipes[machine]) {
-				if (recipes[machine].hasOwnProperty(item) && !indexes.hasOwnProperty(item)) {
+				if (recipes[machine].hasOwnProperty(item) && !tiers.hasOwnProperty(item)) {
 					if (Array.isArray(recipes[machine][item]["ingredients"][0])) {
 						var ingredients = recipes[machine][item]["ingredients"][0];
 					} else {
@@ -1834,7 +1834,7 @@ function indexRecipes() {
 							}
 						}
 					}
-					indexes[item] = highestIndex + 1
+					tiers[item] = highestIndex + 1
 				}
 			}
 		}
@@ -1842,8 +1842,8 @@ function indexRecipes() {
 }
 
 function indexItem(item, recursion=0) {
-	if (indexes.hasOwnProperty(item)) {
-		return indexes[item];
+	if (tiers.hasOwnProperty(item)) {
+		return tiers[item];
 	}
 	if (recursion > 100) {
 		return 100;
@@ -1864,7 +1864,7 @@ function indexItem(item, recursion=0) {
 					}
 				}
 			}
-			indexes[item] = highestIndex + 1;
+			tiers[item] = highestIndex + 1;
 			return highestIndex + 1;
 		}
 	}
@@ -1882,13 +1882,13 @@ function calculateCost(item, costs={}, level=0) {
 					calculateCost(ingredient, costs, level+1);
 				}
 			}
-			if (!costs.hasOwnProperty(indexes[item])) {
-				costs[indexes[item]] = {};
+			if (!costs.hasOwnProperty(tiers[item])) {
+				costs[tiers[item]] = {};
 			}
-			if (!costs[indexes[item]].hasOwnProperty(item)) {
-				costs[indexes[item]][item] = 1;
+			if (!costs[tiers[item]].hasOwnProperty(item)) {
+				costs[tiers[item]][item] = 1;
 			} else {
-				costs[indexes[item]][item] += 1;
+				costs[tiers[item]][item] += 1;
 			}
 			return costs;
 		}
