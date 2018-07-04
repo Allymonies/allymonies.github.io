@@ -1874,7 +1874,7 @@ function calculateCost(item, costs={}, level=0) {
 	for (var machine in recipes) {
 		if (recipes.hasOwnProperty(machine) && recipes[machine].hasOwnProperty(item))  {
 			var recipe = recipes[machine][item]["ingredients"];
-			if (isArray(recipe[0])) {
+			if (Array.isArray(recipe[0])) {
 				recipe = recipe[0];
 			}
 			for (var ingredient in recipe) {
