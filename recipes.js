@@ -1826,8 +1826,9 @@ function indexRecipes() {
 						var ingredients = recipes[machine][item]["ingredients"];
 					}
 					var highestIndex = 0;
-					for (var ingredient in ingredients) {
-						if (ingredients.hasOwnProperty(ingredient)) {
+					for (var ingredientIndex in ingredients) {
+						if (ingredients.hasOwnProperty(ingredientIndex)) {
+							var ingredient = ingredients[ingredientIndex];
 							var curIndex = indexItem(ingredient);
 							if (curIndex > highestIndex) {
 								highestIndex = curIndex;
@@ -1856,8 +1857,9 @@ function indexItem(item, recursion=0) {
 				var ingredients = recipes[machine][item]["ingredients"];
 			}
 			var highestIndex = 0;
-			for (var ingredient in ingredients) {
-				if (ingredients.hasOwnProperty(ingredient)) {
+			for (var ingredientIndex in ingredients) {
+				if (ingredients.hasOwnProperty(ingredientIndex)) {
+					var ingredient = ingredients[ingredientIndex];
 					var curIndex = indexItem(ingredient, recursion+1);
 					if (curIndex > highestIndex) {
 						highestIndex = curIndex;
@@ -1877,9 +1879,9 @@ function calculateCost(item, costs={}, level=0) {
 			if (Array.isArray(recipe[0])) {
 				recipe = recipe[0];
 			}
-			for (var ingredient in recipe) {
-				if (recipe.hasOwnProperty(ingredient)) {
-					calculateCost(ingredient, costs, level+1);
+			for (var ingredientIndex in recipe) {
+				if (recipe.hasOwnProperty(ingredientIndex)) {
+					calculateCost(recipe[ingredientIndex], costs, level+1);
 				}
 			}
 			if (!costs.hasOwnProperty(tiers[item])) {
