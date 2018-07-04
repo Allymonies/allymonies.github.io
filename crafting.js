@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var optionsHtml = "";
 	var machineKeys = Object.keys(recipes);
 	machineKeys.sort();
-	for (var i=0; i<machineKeys.length: i++) {
+	for (var i=0; i<machineKeys.length; i++) {
 		optionsHtml += "<optgroup label=\"" + machineKeys[i] + "\">";
 		var itemKeys = Object.keys(recipes[machineKeys[i]]);
 		itemKeys.sort();
