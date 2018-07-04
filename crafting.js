@@ -45,5 +45,6 @@ function showRecipe(item) {
 }
 
 $("#recipe_picker").on("change", function() {
+	console.log("Doing showRecipe on " + this.value);
 	showRecipe(this.value);
 });
