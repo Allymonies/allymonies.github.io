@@ -15,13 +15,12 @@ $(document).ready(function() {
 	$(".js-example-basic-single").select2();
 });
 
-$("#recipe_picker").on("change", function() {
-	var item = this.value;
+function showRecipe(item) {
 	var cost = calculateCost(item);
 	var highestLevel = 0;
 	var recipeHtml = "<ul>";
 	for (var costLevel in cost) {
-		if (cost.hasOwnProperty(costlevel)) {
+		if (cost.hasOwnProperty(costLevel)) {
 			if (costLevel > highestLevel) {
 				highestLevel = costLevel;
 			}
@@ -38,4 +37,8 @@ $("#recipe_picker").on("change", function() {
 	}
 	recipeHtml += "</ul>";
 	$("#recipe").html(recipeHtml);
+}
+
+$("#recipe_picker").on("change", function() {
+	showRecipe(this.value);
 });
