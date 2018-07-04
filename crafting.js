@@ -5,4 +5,5 @@ $(document).ready(function() {
 	}
 	console.log(optionsHtml);
 	$("#recipe_picker").html(optionsHtml);
+	$("js-example-basic-single").select2();
 });
