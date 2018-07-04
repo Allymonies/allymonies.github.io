@@ -1,7 +1,8 @@
 $(document).ready(function() {
 	var optionsHtml = "";
-	for (var itemKey in indexes) {
+	for (var itemKey in tiers) {
 		optionsHtml += "<option value=\"" + itemKey + "\">" + itemKey + "</option>";
 	}
-	$("#recipe").html(optionsHtml);
+	console.log(optionsHtml);
+	$("#recipe_picker").html(optionsHtml);
 });
