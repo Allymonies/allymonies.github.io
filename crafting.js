@@ -30,7 +30,7 @@ function showRecipe(item) {
 		recipeHtml += "<li><h4>Level " + i.toString() + " Cost</h4><ul>";
 		var itemKeys = Object.keys(cost[i]);
 		itemKeys.sort();
-		for (var j=0; j<itemKeys.length; i++) {
+		for (var j=0; j<itemKeys.length; j++) {
 			recipeHtml += "<li>" + itemKeys[j] + ": <b>x" + cost[i][itemKeys[j]] + "</b> - " + machines[itemKeys[j]];
 		}
 		recipeHtml += "</ul></li>";
