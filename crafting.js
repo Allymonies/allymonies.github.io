@@ -31,7 +31,7 @@ function showRecipe(item) {
 		var itemKeys = Object.keys(cost[i]);
 		itemKeys.sort();
 		for (var j=0; j<itemKeys.length; i++) {
-			recipeHtml += "<li>" + itemKeys[j] + ": <b>x" + cost[i][itemKeys[j]] + "</b> - " + machine[itemKeys[j]];
+			recipeHtml += "<li>" + itemKeys[j] + ": <b>x" + cost[i][itemKeys[j]] + "</b> - " + machines[itemKeys[j]];
 		}
 		recipeHtml += "</ul></li>";
 	}
@@ -42,3 +42,5 @@ function showRecipe(item) {
 $("#recipe_picker").on("change", function() {
 	showRecipe(this.value);
 });
+
+showRecipe("accurate_autobow");
