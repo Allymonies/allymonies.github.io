@@ -14,3 +14,28 @@ $(document).ready(function() {
 	$("#recipe_picker").html(optionsHtml);
 	$(".js-example-basic-single").select2();
 });
+
+$("#recipe_picker").on("change", function() {
+	var item = this.value;
+	var cost = calculateCost(item);
+	var highestLevel = 0;
+	var recipeHtml = "<ul>";
+	for (var costLevel in cost) {
+		if (cost.hasOwnProperty(costlevel)) {
+			if (costLevel > highestLevel) {
+				highestLevel = costLevel;
+			}
+		}
+	}
+	for (var i = 0; i < highestLevel; i++) {
+		recipeHtml += "<li><h4>Level " + i.toString() + " Cost</h4><ul>";
+		var itemKeys = Object.keys(cost[i]);
+		itemKeys.sort();
+		for (var j=0; j<itemKeys.length; i++) {
+			recipeHtml += "<li>" + itemKeys[j] + ": <b>x" + cost[i][itemKeys[j]] + "</b> - " + machine[itemKeys[j]];
+		}
+		recipeHtml += "</ul></li>";
+	}
+	recipeHtml += "</ul>";
+	$("#recipe").html(recipeHtml);
+});
