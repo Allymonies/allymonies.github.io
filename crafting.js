@@ -13,6 +13,7 @@ $(document).ready(function() {
 	}
 	$("#recipe_picker").html(optionsHtml);
 	$(".js-example-basic-single").select2();
+	showRecipe("accurate_autobow");
 });
 
 function showRecipe(item) {
@@ -31,7 +32,11 @@ function showRecipe(item) {
 		var itemKeys = Object.keys(cost[i]);
 		itemKeys.sort();
 		for (var j=0; j<itemKeys.length; j++) {
-			recipeHtml += "<li>" + itemKeys[j] + ": <b>x" + cost[i][itemKeys[j]] + "</b> - " + machines[itemKeys[j]];
+			if (machines.hasOwnProperty(itemKeys[j])) {
+				recipeHtml += "<li>" + itemKeys[j] + ": <b>x" + cost[i][itemKeys[j]] + "</b> - " + machines[itemKeys[j]];
+			} else {
+				recipeHtml += "<li>" + itemKeys[j] + ": <b>x" + cost[i][itemKeys[j]] + "</b> - Raw Material";
+			}
 		}
 		recipeHtml += "</ul></li>";
 	}
@@ -42,5 +47,3 @@ function showRecipe(item) {
 $("#recipe_picker").on("change", function() {
 	showRecipe(this.value);
 });
-
-showRecipe("accurate_autobow");
