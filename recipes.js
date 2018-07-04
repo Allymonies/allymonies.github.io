@@ -1841,7 +1841,7 @@ function indexRecipes() {
 	}
 }
 
-function indexItem(item, recursion=0):
+function indexItem(item, recursion=0) {
 	if (indexes.hasOwnProperty(item)) {
 		return indexes[item];
 	}
