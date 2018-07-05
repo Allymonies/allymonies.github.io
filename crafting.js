@@ -123,6 +123,29 @@ $(document).ready(function() {
 			addRecipe(imports[i][0], imports[i][1], imports[i][2]);
 			customRecipes.push([imports[i][0], imports[i][1], imports[i][2]]);
 		}
+		var matHtml = "";
+		for (var i=0; i<materials.length; i++) {
+			matHtml += "<option value=\"" + materials[i] + "\">";
+		}	
+		$("#materials").html(matHtml);
+		var optionsHtml = "";
+		var machineKeys = Object.keys(recipes);
+		machineKeys.sort();
+		for (var i=0; i<machineKeys.length; i++) {
+			optionsHtml += "<optgroup label=\"" + machineKeys[i] + "\">";
+			var itemKeys = Object.keys(recipes[machineKeys[i]]);
+			itemKeys.sort();
+			for (var j=0; j<itemKeys.length; ++j) {
+				optionsHtml += "<option value=\"" + itemKeys[j] + "\">" + itemKeys[j] + "</option>";
+			}
+			optionsHtml += "</optgroup>";
+		}
+		$("#recipe_picker").html(optionsHtml);
+		$(".js-example-basic-single").select2();
+		$("#create_recipe").toggleClass("hidden");
+		$("#machine_picker").val("manual").trigger("change");
+		$("#creation_id").val("");
+		$("#creation_ingredients").html("");
 	});
 });
 
