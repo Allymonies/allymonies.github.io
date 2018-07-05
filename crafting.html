@@ -2,14 +2,38 @@
 <html>
 <head>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link href="crafting.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script src="/recipes.js"></script>
-<script src="/crafting.js"></script>
+<script src="recipes.js"></script>
+<script src="crafting.js"></script>
 </head>
 <body>
 <h1>LifeEmulator Crafting Utility</h1>
-<p>In progress.</p>
+<p>V0.25 by Shield</p>
+<p id="custom_recipes">
+
+</p>
+<button type="button" id="new_recipe">New Recipe</button>
+<br>
+<div id="create_recipe" class="hidden">
+Machine: <select class="js-example-basic-single" name="machine" id="machine_picker" style="width: 300px;"></select>
+<br>
+<br>
+Recipe id: <input id="creation_id">
+<br>
+Ingredients:
+<br>
+<div id="creation_ingredients" class="ingredients">
+
+</div>
+<button type="button" id="add_ingredient">Add Ingredient</button>
+<button type="button" id="remove_ingredient">Remove Ingredient</button>
+<datalist id="materials">
+</datalist>
+<br>
+<button type="button" id="save_recipe">Save Recipe</button>
+</div>
 <p>
 View recipe of
 </p>

@@ -1780,6 +1780,7 @@ var recipes = {
 };
 var tiers = {};
 var machines = {};
+var materials = [];
 //Functions
 function getRecipe(item, machine=false) {
 	if (machine && recipes.hasOwnProperty(machine)) {
@@ -1799,6 +1800,12 @@ function getRecipe(item, machine=false) {
 }
 
 function addRecipe(machine, item, ingredients) {
+	console.log(machine);
+	console.log(item);
+	console.log(ingredients);
+	if ($.inArray(item, materials) == -1) {
+		materials.push(item);
+	}
 	if (!recipes.hasOwnProperty(machine)) {
 		return false;
 	}
@@ -1822,6 +1829,9 @@ function indexRecipes() {
 		if (recipes.hasOwnProperty(machine))  {
 			for (var item in recipes[machine]) {
 				if (recipes[machine].hasOwnProperty(item) && !tiers.hasOwnProperty(item)) {
+					if ($.inArray(item, materials) == -1) {
+						materials.push(item);
+					}
 					machines[item] = machine;
 					if (Array.isArray(recipes[machine][item]["ingredients"][0])) {
 						var ingredients = recipes[machine][item]["ingredients"][0];
@@ -1851,6 +1861,9 @@ function indexItem(item, recursion=0) {
 	}
 	if (recursion > 100) {
 		return 100;
+	}
+	if ($.inArray(item, materials) == -1) {
+		materials.push(item);
 	}
 	for (var machine in recipes) {
 		if (recipes.hasOwnProperty(machine) && recipes[machine].hasOwnProperty(item))  {
