@@ -142,10 +142,6 @@ $(document).ready(function() {
 		}
 		$("#recipe_picker").html(optionsHtml);
 		$(".js-example-basic-single").select2();
-		$("#create_recipe").toggleClass("hidden");
-		$("#machine_picker").val("manual").trigger("change");
-		$("#creation_id").val("");
-		$("#creation_ingredients").html("");
 	});
 });
 
