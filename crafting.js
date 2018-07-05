@@ -1,3 +1,45 @@
+function copyToClipboardFF(text) {
+  window.prompt ("Copy to clipboard: Ctrl C, Enter", text);
+}
+
+function copyToClipboard(txt) {
+  var success   = true,
+      range     = document.createRange(),
+      selection;
+
+  // For IE.
+  if (window.clipboardData) {
+    window.clipboardData.setData("Text", txt);        
+  } else {
+    // Create a temporary element off screen.
+    var tmpElem = $('<div>');
+    tmpElem.css({
+      position: "absolute",
+      left:     "-1000px",
+      top:      "-1000px",
+    });
+    // Add the input value to the temp element.
+    tmpElem.text(txt);
+    $("body").append(tmpElem);
+    // Select temp element.
+    range.selectNodeContents(tmpElem.get(0));
+    selection = window.getSelection ();
+    selection.removeAllRanges ();
+    selection.addRange (range);
+    // Lets copy.
+    try { 
+      success = document.execCommand ("copy", false, null);
+    }
+    catch (e) {
+      copyToClipboardFF(txt);
+    }
+    if (success) {
+      alert ("JSON copied, store it somewhere safe!");
+      // remove temp element.
+      tmpElem.remove();
+    }
+  }
+}
 $(document).ready(function() {
 	var customRecipes = [];
 	addMachine("manual");
@@ -73,13 +115,10 @@ $(document).ready(function() {
 	});
 	$("#export_recipes").click(function() {
 		$("#export-copy").html(JSON.stringify(customRecipes));
-		var copySpan = document.getElementById("export-copy");
-		copySpan.select();
-		document.execCommand("copy");
-		alert("Recipe JSON copied to clipboard!");
+		copyToClipboard(JSON.stringify(customRecipes));
 	});
 	$("#import_recipes").click(function() {
-		var imports = prompt("Please enter recipe JSON", "[]");
+		var imports = JSON.parse(prompt("Please enter recipe JSON", "[]"));
 		for (var i = 0; i < imports.length; i++) {
 			addRecipe(imports[i][0], imports[i][1], imports[i][2]);
 			customRecipes.push([imports[i][0], imports[i][1], imports[i][2]]);
