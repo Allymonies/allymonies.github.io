@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var customRecipes = [];
 	addMachine("manual");
 	var optionsHtml = "";
 	var mOpts = "";
@@ -44,6 +45,7 @@ $(document).ready(function() {
 		$("#creation_ingredients").children("input").each(function(i) {
 			ingredientArray.push($(this).val());
 		});
+		customRecipes.push([$("#machine_picker").val(), $("#creation_id").val(), ingredientArray]);
 		addRecipe($("#machine_picker").val(), $("#creation_id").val(), ingredientArray);
 		var matHtml = "";
 		for (var i=0; i<materials.length; i++) {
@@ -68,6 +70,20 @@ $(document).ready(function() {
 		$("#machine_picker").val("manual").trigger("change");
 		$("#creation_id").val("");
 		$("#creation_ingredients").html("");
+	});
+	$("#export_recipes").click(function() {
+		$("#export-copy").html(JSON.stringify(customRecipes));
+		var copySpan = document.getElementById("export-copy");
+		copySpan.select();
+		document.execCommand("copy");
+		alert("Recipe JSON copied to clipboard!");
+	});
+	$("#import_recipes").click(function() {
+		var imports = prompt("Please enter recipe JSON", "[]");
+		for (var i = 0; i < imports.length; i++) {
+			addRecipe(imports[i][0], imports[i][1], imports[i][2]);
+			customRecipes.push([imports[i][0], imports[i][1], imports[i][2]]);
+		}
 	});
 });
 
