@@ -142,6 +142,8 @@ $(document).ready(function() {
 		}
 		$("#recipe_picker").html(optionsHtml);
 		$(".js-example-basic-single").select2();
+		$('#recipe_picker').val(imports[0][1]); // Select the option with a value of '1'
+		$('#recipe_picker').trigger('change'); // Notify any JS components that the value changed
 	});
 });
 
