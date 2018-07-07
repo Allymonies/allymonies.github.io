@@ -148,7 +148,9 @@ $(document).ready(function() {
 });
 
 function showRecipe(item) {
-	var cost = calculateCost(item);
+	var cost_object = calculateCost(item);
+	var cost = cost_object["costs"];
+	var inv = cost_object["inventory"];
 	var highestLevel = 0;
 	var recipeHtml = "<ul>";
 	for (var costLevel in cost) {
@@ -170,6 +172,16 @@ function showRecipe(item) {
 			}
 		}
 		recipeHtml += "</ul></li>";
+	}
+	var itemKeys = Object.keys(inv);
+	if (itemKeys.length > 0) {
+		itemKeys.sort();
+		recipeHtml += "<li><h4>Remaining Inventory</h4><ul>";
+		for (var i = 0; i<itemKeys.length; i++) {
+			recipeHtml += "<li>" + itemKeys[i] + ": <b>x" + inv[itemKeys[i]] + "</b>";
+		}
+		console.log(inv);
+		recipeHtml += "</ul>";
 	}
 	recipeHtml += "</ul>";
 	$("#recipe").html(recipeHtml);

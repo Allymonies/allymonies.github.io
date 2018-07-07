@@ -1186,13 +1186,15 @@ var recipes = {
             "ingredients": [
                 "gold_ore"
             ],
-            "machine": "extractor"
+            "machine": "extractor",
+			"quantity": 8
         },
         "iron_fragments": {
             "ingredients": [
                 "iron_ore"
             ],
-            "machine": "extractor"
+            "machine": "extractor",
+			"quantity": 8
         },
         "plant_fiber": {
             "ingredients": [
@@ -1916,7 +1918,7 @@ function indexItem(item, recursion=0) {
 	}
 }
 
-function calculateCost(item, costs={}, level=0) {
+function calculateCost(item, costs={}, level=0, inventory={}) {
 	for (var machine in recipes) {
 		if (recipes.hasOwnProperty(machine) && recipes[machine].hasOwnProperty(item))  {
 			var recipe = recipes[machine][item]["ingredients"];
@@ -1924,8 +1926,18 @@ function calculateCost(item, costs={}, level=0) {
 				recipe = recipe[0];
 			}
 			for (var ingredientIndex in recipe) {
-				if (recipe.hasOwnProperty(ingredientIndex)) {
-					calculateCost(recipe[ingredientIndex], costs, level+1);
+				if (recipe.hasOwnProperty(ingredientIndex) && (!inventory.hasOwnProperty(recipe[ingredientIndex]) || inventory[recipe[ingredientIndex]] == 0)) {
+					calculateCost(recipe[ingredientIndex], costs, level+1, inventory);
+				} else if (inventory.hasOwnProperty(recipe[ingredientIndex]) && inventory[recipe[ingredientIndex]] > 0) {
+					inventory[recipe[ingredientIndex]] -= 1;
+					if (!costs.hasOwnProperty(tiers[recipe[ingredientIndex]])) {
+						costs[tiers[recipe[ingredientIndex]]] = {};
+					}
+					if (!costs[tiers[recipe[ingredientIndex]]].hasOwnProperty(recipe[ingredientIndex])) {
+						costs[tiers[recipe[ingredientIndex]]][recipe[ingredientIndex]] = 1;
+					} else {
+						costs[tiers[recipe[ingredientIndex]]][recipe[ingredientIndex]] += 1;
+					}
 				}
 			}
 			if (!costs.hasOwnProperty(tiers[item])) {
@@ -1936,7 +1948,17 @@ function calculateCost(item, costs={}, level=0) {
 			} else {
 				costs[tiers[item]][item] += 1;
 			}
-			return costs;
+			if (recipes[machine][item].hasOwnProperty("quantity")) {
+				if (inventory.hasOwnProperty(item)) {
+					inventory[item] += recipes[machine][item]["quantity"] - 1;
+				} else {
+					inventory[item] = recipes[machine][item]["quantity"] - 1;
+				}
+			}
+			return {
+				"costs": costs,
+				"inventory": inventory
+			};
 		}
 	}
 	if (!costs.hasOwnProperty(0)) {
