@@ -177,14 +177,20 @@ function showRecipe(item) {
 	var itemKeys = Object.keys(inv);
 	if (itemKeys.length > 0) {
 		itemKeys.sort();
-		recipeHtml += "<li><h4>Remaining Inventory</h4><ul>";
+		var didHeader = false;
 		for (var i = 0; i<itemKeys.length; i++) {
 			if (inv[itemKeys[i]] != 0) {
+				if (!didHeader) {
+					recipeHtml += "<li><h4>Remaining Inventory</h4><ul>";
+					didHeader = true;
+				}
 				recipeHtml += "<li>" + itemKeys[i] + ": <b>x" + inv[itemKeys[i]] + "</b>";
 			}
 		}
 		console.log(inv);
-		recipeHtml += "</ul>";
+		if (didHeader) {
+			recipeHtml += "</ul>";
+		}
 	}
 	recipeHtml += "</ul>";
 	$("#recipe").html(recipeHtml);
