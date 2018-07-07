@@ -179,7 +179,9 @@ function showRecipe(item) {
 		itemKeys.sort();
 		recipeHtml += "<li><h4>Remaining Inventory</h4><ul>";
 		for (var i = 0; i<itemKeys.length; i++) {
-			recipeHtml += "<li>" + itemKeys[i] + ": <b>x" + inv[itemKeys[i]] + "</b>";
+			if (inv[itemKeys[i]] != 0) {
+				recipeHtml += "<li>" + itemKeys[i] + ": <b>x" + inv[itemKeys[i]] + "</b>";
+			}
 		}
 		console.log(inv);
 		recipeHtml += "</ul>";
