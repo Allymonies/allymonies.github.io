@@ -890,6 +890,12 @@ var recipes = {
             ],
             "machine": "chemical_assembler"
         },
+		"ice": {
+			"ingredients": [
+				"water_bucket"
+			],
+			"machine": "chemical_assembler"
+		},
         "glass_crystals": {
             "ingredients": [
                 "glass"
@@ -1221,7 +1227,28 @@ var recipes = {
                 ]
             ],
             "machine": "extractor"
-        }
+        },
+		"gravel": {
+			"ingredients": [
+				"cobblestone",
+			],
+			"machine": "extractor",
+			"quantity": 6
+		},
+		"sand": {
+			"ingredients": [
+				"gravel",
+			],
+			"machine": "extractor",
+			"quantity": 2
+		},
+		"flint": {
+			"ingredients": [
+				"gravel",
+			],
+			"machine": "extractor",
+			"quantity": 2
+		}
     },
     "metal_caster": {
         "3_step_dial": {
