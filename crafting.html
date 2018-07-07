@@ -13,7 +13,7 @@ LE Industry Utility
 </head>
 <body>
 <h1>LifeEmulator Crafting Utility</h1>
-<p>V0.55 by Shield</p>
+<p>V0.6 by Shield</p>
 <p id="custom_recipes">
 
 </p>
@@ -29,9 +29,12 @@ Quantity Produced: <input type="number" id="produced" value=1 style="width: 50px
 <br>
 Ingredients:
 <br>
-<div id="creation_ingredients" class="ingredients">
-
-</div>
+<table id="creation_ingredients" class="ingredients">
+<tr>
+	<th class="material_header">Item ID</th>
+	<th class="quantity_header">Quantity</th>
+</tr>
+</table>
 <button type="button" id="add_ingredient">Add Ingredient</button>
 <button type="button" id="remove_ingredient">Remove Ingredient</button>
 <datalist id="materials">

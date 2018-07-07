@@ -74,19 +74,25 @@ $(document).ready(function() {
 		$("#machine_picker").val("manual").trigger("change");
 		$("#produced").val(1);
 		$("#creation_id").val("");
-		$("#creation_ingredients").html("");
+		$("#creation_ingredients").find(".ingredient").remove();
 	});
 	$("#add_ingredient").click(function() {
-		$("#creation_ingredients").append("<input list=\"materials\"><br>");
+		$("#creation_ingredients").append("<tr class=\"ingredient\"><td><input class=\"material\" list=\"materials\"></td><td><input class=\"material_quantity\" type=\"number\" value=1></td></tr>");
 	});
 	$("#remove_ingredient").click(function() {
-		$("#creation_ingredients").children().last().remove();
-		$("#creation_ingredients").children().last().remove();
+		$("#creation_ingredients").find(".ingredient").last("tr").remove();
 	});
 	$("#save_recipe").click(function() {
 		var ingredientArray = [];
-		$("#creation_ingredients").children("input").each(function(i) {
-			ingredientArray.push($(this).val());
+		$("#creation_ingredients").find(".ingredient").each(function(i) {
+			if (!isNaN(parseInt($(this).find(".material_quantity").val()))) {
+				for (var i = 0; i < parseInt($(this).find(".material_quantity").val()); i++) {
+					ingredientArray.push($(this).find(".material").val());
+				}
+			} else {
+				ingredientArray.push($(this).find(".material").val());
+			}
+			//ingredientArray.push($(this).val());
 		});
 		customRecipes.push([$("#machine_picker").val(), $("#creation_id").val(), ingredientArray, parseInt($("#produced").val())]);
 		addRecipe($("#machine_picker").val(), $("#creation_id").val(), ingredientArray, parseInt($("#produced").val()));
@@ -112,7 +118,7 @@ $(document).ready(function() {
 		$("#create_recipe").toggleClass("hidden");
 		$("#machine_picker").val("manual").trigger("change");
 		$("#creation_id").val("");
-		$("#creation_ingredients").html("");
+		$("#creation_ingredients").find(".ingredient").remove();
 	});
 	$("#export_recipes").click(function() {
 		$("#export-copy").html(JSON.stringify(customRecipes));
@@ -187,7 +193,6 @@ function showRecipe(item) {
 				recipeHtml += "<li>" + itemKeys[i] + ": <b>x" + inv[itemKeys[i]] + "</b>";
 			}
 		}
-		console.log(inv);
 		if (didHeader) {
 			recipeHtml += "</ul>";
 		}

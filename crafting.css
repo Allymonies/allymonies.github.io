@@ -4,4 +4,20 @@
 
 .ingredients {
 	margin-left: 40px;
+	width: 300px;
+}
+
+.ingredient {
+	
+}
+
+.material_header {
+	width: 200px;
+}
+.quantity_header {
+	width: 100px;
+}
+
+.material_quantity {
+	width: 75px;
 }
