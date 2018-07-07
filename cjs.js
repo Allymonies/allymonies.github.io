@@ -72,6 +72,7 @@ $(document).ready(function() {
 	$("#new_recipe").click(function() {
 		$("#create_recipe").toggleClass("hidden");
 		$("#machine_picker").val("manual").trigger("change");
+		$("#produced").val(1);
 		$("#creation_id").val("");
 		$("#creation_ingredients").html("");
 	});
@@ -87,8 +88,8 @@ $(document).ready(function() {
 		$("#creation_ingredients").children("input").each(function(i) {
 			ingredientArray.push($(this).val());
 		});
-		customRecipes.push([$("#machine_picker").val(), $("#creation_id").val(), ingredientArray]);
-		addRecipe($("#machine_picker").val(), $("#creation_id").val(), ingredientArray);
+		customRecipes.push([$("#machine_picker").val(), $("#creation_id").val(), ingredientArray, parseInt($("#produced").val())]);
+		addRecipe($("#machine_picker").val(), $("#creation_id").val(), ingredientArray, parseInt($("#produced").val()));
 		var matHtml = "";
 		for (var i=0; i<materials.length; i++) {
 			matHtml += "<option value=\"" + materials[i] + "\">";
@@ -120,8 +121,8 @@ $(document).ready(function() {
 	$("#import_recipes").click(function() {
 		var imports = JSON.parse(prompt("Please enter recipe JSON", "[]"));
 		for (var i = 0; i < imports.length; i++) {
-			addRecipe(imports[i][0], imports[i][1], imports[i][2]);
-			customRecipes.push([imports[i][0], imports[i][1], imports[i][2]]);
+			addRecipe(imports[i][0], imports[i][1], imports[i][2], imports[i][3]);
+			customRecipes.push([imports[i][0], imports[i][1], imports[i][2], imports[i][3]]);
 		}
 		var matHtml = "";
 		for (var i=0; i<materials.length; i++) {

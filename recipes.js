@@ -1828,7 +1828,7 @@ function getRecipe(item, machine=false) {
 	return false;
 }
 
-function addRecipe(machine, item, ingredients) {
+function addRecipe(machine, item, ingredients, quantity=1) {
 	console.log(machine);
 	console.log(item);
 	console.log(ingredients);
@@ -1840,7 +1840,8 @@ function addRecipe(machine, item, ingredients) {
 	}
 	recipes[machine][item] = {
 		"machine":machine,
-		"ingredients": ingredients
+		"ingredients": ingredients,
+		"quantity":quantity
 	}
 	indexRecipes();
 	return recipes[machine][item];
@@ -1948,7 +1949,7 @@ function calculateCost(item, costs={}, level=0, inventory={}) {
 			} else {
 				costs[tiers[item]][item] += 1;
 			}
-			if (recipes[machine][item].hasOwnProperty("quantity")) {
+			if (recipes[machine][item].hasOwnProperty("quantity") && recipes[machine][item]["quantity"] > 1) {
 				if (inventory.hasOwnProperty(item)) {
 					inventory[item] += recipes[machine][item]["quantity"] - 1;
 				} else {
